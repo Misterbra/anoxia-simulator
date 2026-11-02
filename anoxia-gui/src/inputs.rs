@@ -593,7 +593,17 @@ fn events_editor(ui: &mut Ui, events: &mut Vec<Event>, default_flow: f64, lang: 
         "Events during the release (failure, backup, isolation)",
     );
     let title = if events.is_empty() { base.to_string() } else { format!("{base} — {}", events.len()) };
-    egui::CollapsingHeader::new(RichText::new(title).strong()).id_source("events").default_open(!events.is_empty()).show(ui, |ui| {
+    // Open the section as soon as events appear (example or file loaded), so
+    // that an assumed failure or backup fan is never hidden from the user.
+    let seen_id = ui.id().with("events_seen");
+    let seen: usize = ui.ctx().data(|d| d.get_temp(seen_id)).unwrap_or(0);
+    let force = if !events.is_empty() && seen == 0 { Some(true) } else { None };
+    ui.ctx().data_mut(|d| d.insert_temp(seen_id, events.len()));
+    egui::CollapsingHeader::new(RichText::new(title).strong())
+        .id_source("events")
+        .default_open(!events.is_empty())
+        .open(force)
+        .show(ui, |ui| {
         hint(
             ui,
             t(
