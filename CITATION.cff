@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Anoxia Simulator"
+abstract: "Oxygen-depletion and CO2 risk assessment for rooms where inert gases are stored or used: release flow, room oxygen balance, alarm times, ventilation failure, sizing, self-contained report."
+authors:
+  - family-names: Brag
+    given-names: Nabil
+version: 2.1.0
+date-released: 2026-11-02
+license: AGPL-3.0-or-later
+repository-code: "https://github.com/Misterbra/anoxia-simulator"
+url: "https://github.com/Misterbra/anoxia-simulator"
+keywords:
+  - oxygen depletion
+  - oxygen deficiency hazard
+  - anoxia
+  - inert gas
+  - confined space
+  - industrial safety
+  - laboratory safety
+  - ventilation
+  - risk assessment
+  - nitrogen
+  - argon
+  - carbon dioxide
