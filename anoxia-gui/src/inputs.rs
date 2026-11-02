@@ -614,7 +614,7 @@ fn events_editor(ui: &mut Ui, events: &mut Vec<Event>, default_flow: f64, lang: 
         let fmt = move |v: f64, d: usize| fmt_num(v, d, lang).replace('\u{202f}', "");
         let parse = |s: &str| s.replace(',', ".").replace(['\u{202f}', ' ', '\u{a0}'], "").parse().ok();
         let mut remove: Option<usize> = None;
-        egui::Grid::new("events_grid").num_columns(4).spacing([8.0, 6.0]).show(ui, |ui| {
+        egui::Grid::new("events_grid").num_columns(3).spacing([8.0, 6.0]).show(ui, |ui| {
             for (i, e) in events.iter_mut().enumerate() {
                 let mut minutes = e.time_s / 60.0;
                 if ui
@@ -640,7 +640,7 @@ fn events_editor(ui: &mut Ui, events: &mut Vec<Event>, default_flow: f64, lang: 
                     t("Isolement de la fuite", "Leak isolated"),
                 );
                 let selected = if is_stop { stop } else if is_start { start } else { iso };
-                egui::ComboBox::from_id_source(("event_action", i)).selected_text(selected).width(260.0).show_ui(ui, |ui| {
+                egui::ComboBox::from_id_source(("event_action", i)).selected_text(selected).width(250.0).show_ui(ui, |ui| {
                     if ui.selectable_label(is_stop, stop).clicked() {
                         e.action = EventAction::VentilationStops;
                     }
@@ -654,7 +654,14 @@ fn events_editor(ui: &mut Ui, events: &mut Vec<Event>, default_flow: f64, lang: 
                         e.action = EventAction::ReleaseIsolated;
                     }
                 });
+                if ui.small_button("✕").on_hover_text(t("Supprimer", "Remove")).clicked() {
+                    remove = Some(i);
+                }
+                ui.end_row();
+                // Flow and mode of a ventilation start on their own line, so
+                // that the editor never grows wider than the panel.
                 if let EventAction::VentilationStarts { flow_m3h, mode } = &mut e.action {
+                    ui.label("");
                     ui.horizontal(|ui| {
                         ui.add(
                             DragValue::new(flow_m3h)
@@ -669,19 +676,18 @@ fn events_editor(ui: &mut Ui, events: &mut Vec<Event>, default_flow: f64, lang: 
                             VentilationMode::Extraction => t("extraction", "exhaust"),
                             VentilationMode::Supply => t("soufflage", "supply"),
                         };
-                        egui::ComboBox::from_id_source(("event_mode", i)).selected_text(name(*mode)).show_ui(ui, |ui| {
-                            for m in [VentilationMode::Extraction, VentilationMode::Supply] {
-                                ui.selectable_value(mode, m, name(m));
-                            }
-                        });
+                        egui::ComboBox::from_id_source(("event_mode", i)).selected_text(name(*mode)).width(110.0).show_ui(
+                            ui,
+                            |ui| {
+                                for m in [VentilationMode::Extraction, VentilationMode::Supply] {
+                                    ui.selectable_value(mode, m, name(m));
+                                }
+                            },
+                        );
                     });
-                } else {
                     ui.label("");
+                    ui.end_row();
                 }
-                if ui.small_button("✕").on_hover_text(t("Supprimer", "Remove")).clicked() {
-                    remove = Some(i);
-                }
-                ui.end_row();
             }
         });
         if let Some(i) = remove {
