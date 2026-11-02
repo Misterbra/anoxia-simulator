@@ -27,6 +27,25 @@ Everything runs locally, in French or English, with an interactive tutorial at f
 
 > **Disclaimer.** This is a screening model, an aid to the assessment by a competent person. Its results must never be used to declare an atmosphere safe; only a calibrated detector can do that.
 
+## Why this tool, and how it compares
+
+Oxygen-depletion assessments are usually done with a hand formula (whole inventory released at once, no ventilation), an institutional spreadsheet, or, at the other end, a commercial consequence-modelling package or CFD. Between the two there was no free, validated, time-dependent tool that an HSE engineer can run on a laptop and hand to an auditor with the evidence attached. Anoxia Simulator fills that gap.
+
+| | Web calculators (Nottingham, Cryolab, supplier pages) | Institutional methods (INRS ED 155, BCGA CP 52, Fermilab FESHM 4240, JLab) | ODHMOD (AIHA, Excel) | CryoToolBox (Python) | Phast, EFFECTS | CFD (FDS, FLACS, Fluent) | **Anoxia Simulator** |
+|---|---|---|---|---|---|---|---|
+| Access | Free, online | Free, documents and spreadsheets | Free, published | Free, open source, no interface | Commercial licence | Commercial or free, expert work | **Free, open source (AGPL), desktop, offline** |
+| Room balance over time | No (static displacement) | Analytic steady state or constant flow | Yes (Euler, imposed flow) | Yes (constant flow) | Yes | Yes, 3-D | **Yes, exact integration on each step** |
+| Source: container blowdown, real gas | No | No (constant flow) | No | No | Yes | Source term supplied by the user | **Yes (isentropic orifice, NIST real-gas data, CO₂ liquid-vapour)** |
+| Near field / stratification | No | No | Near field / far field | No | Partial | Full 3-D | **Near field (Nicas / ODHMOD) and indicative two-zone layer** |
+| Ventilation failure, timeline of events, before / after | No | By hand | No | No | Scenario by scenario | Scenario by scenario | **Built-in studies, including dated events** |
+| Sizing (required flow, flow limiter) | No | By hand | No | No | No | No | **Yes** |
+| O₂ and CO₂ toxicity together | No | No | No | No | Yes | Yes | **Yes** |
+| Report and recommendations | No | Templates | No | No | Yes | Expert report | **Self-contained HTML report, recommendations validated by the author** |
+| Validation evidence shipped with the tool | No | Institutional | Peer-reviewed article | Tests | Vendor dossiers | Case by case | **59 reference cases recomputed live in the application** |
+| Probabilistic ODH classification (fatality rate) | No | Yes (Fermilab, JLab) | No | Yes | No | No | No (deterministic by design) |
+
+What the others do better: the Fermilab and JLab methods give a probabilistic ODH class from component failure rates, which this tool deliberately does not compute; Phast, EFFECTS and CFD resolve jets, cryogenic pools, outdoor dispersion and 3-D geometry. Anoxia Simulator is the screening step before them: it states its own limits and says when a more detailed study is needed. The comparison is detailed, with the published figures reproduced case by case, in [VALIDATION.md](VALIDATION.md).
+
 ## Screenshots
 
 | Interactive tutorial | CO₂ scenario (toxicity and oxygen together) |

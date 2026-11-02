@@ -19,6 +19,25 @@ Le moteur est accompagné d'un **dossier de validation intégré**. Les 55 cas c
 
 > **Avertissement** — Modèle simplifié. Les résultats ne doivent jamais servir à déclarer une atmosphère sûre ; ils doivent être interprétés par une personne compétente en prévention des risques. Seule la mesure par un détecteur étalonné fait foi.
 
+## Pourquoi ce logiciel, et ce que font les autres
+
+Une évaluation du risque d'anoxie se fait d'ordinaire avec une formule manuelle (tout l'inventaire d'un coup, sans ventilation), un tableur institutionnel, ou, à l'autre extrême, un logiciel commercial de modélisation des conséquences ou de la CFD. Entre les deux, il n'existait pas d'outil gratuit, validé et dynamique qu'un préventeur puisse faire tourner sur son poste et remettre à un auditeur avec les preuves jointes. Anoxia Simulator occupe cette place.
+
+| | Calculateurs web (Nottingham, Cryolab, pages fournisseurs) | Méthodes institutionnelles (INRS ED 155, BCGA CP 52, Fermilab FESHM 4240, JLab) | ODHMOD (AIHA, Excel) | CryoToolBox (Python) | Phast, EFFECTS | CFD (FDS, FLACS, Fluent) | **Anoxia Simulator** |
+|---|---|---|---|---|---|---|---|
+| Accès | Gratuit, en ligne | Gratuit, documents et tableurs | Gratuit, publié | Gratuit, libre, sans interface | Licence commerciale | Commercial ou libre, travail d'expert | **Gratuit, libre (AGPL), bureau, hors ligne** |
+| Bilan du local dans le temps | Non (déplacement statique) | Régime permanent analytique ou débit constant | Oui (Euler, débit imposé) | Oui (débit constant) | Oui | Oui, 3D | **Oui, intégration exacte à chaque pas** |
+| Source : vidange du récipient, gaz réel | Non | Non (débit constant) | Non | Non | Oui | Terme source fourni par l'utilisateur | **Oui (orifice isentropique, données NIST, CO₂ liquide-vapeur)** |
+| Champ proche / stratification | Non | Non | Champ proche / lointain | Non | Partiel | 3D complète | **Champ proche (Nicas / ODHMOD) et couche bi-zone indicative** |
+| Panne de ventilation, chronologie d'événements, avant / après | Non | À la main | Non | Non | Scénario par scénario | Scénario par scénario | **Études intégrées, y compris événements datés** |
+| Dimensionnement (débit nécessaire, limiteur) | Non | À la main | Non | Non | Non | Non | **Oui** |
+| O₂ et toxicité du CO₂ ensemble | Non | Non | Non | Non | Oui | Oui | **Oui** |
+| Rapport et recommandations | Non | Modèles de documents | Non | Non | Oui | Rapport d'expert | **Rapport HTML autonome, recommandations validées par le rédacteur** |
+| Preuves de validation livrées avec l'outil | Non | Institutionnelles | Article à comité de lecture | Tests | Dossiers éditeur | Au cas par cas | **59 cas de référence recalculés en direct dans l'application** |
+| Classement ODH probabiliste (taux de décès) | Non | Oui (Fermilab, JLab) | Non | Oui | Non | Non | Non (déterministe par choix) |
+
+Ce que les autres font mieux : les méthodes Fermilab et JLab donnent une classe ODH probabiliste à partir des taux de défaillance des composants, que cet outil ne calcule volontairement pas ; Phast, EFFECTS et la CFD résolvent les jets, les flaques cryogéniques, la dispersion extérieure et la géométrie 3D. Anoxia Simulator est l'étape de criblage qui les précède : il énonce ses propres limites et dit quand une étude plus poussée est nécessaire. La comparaison détaillée, avec les valeurs publiées reproduites cas par cas, est dans [VALIDATION.md](VALIDATION.md).
+
 ## Captures d'écran
 
 | Tutoriel interactif | Scénario CO₂ (toxicité et oxygène) |
