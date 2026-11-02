@@ -9,7 +9,9 @@ Application de bureau (Windows, hors ligne) pour les préventeurs, responsables 
 
 *[English version](README.md)*
 
-![Onglet Résultats](docs/img/02_resultats.png)
+![Démonstration : résultats, chronologie d'événements, étude avant / après](docs/img/demo-fr.gif)
+
+*Démonstration commentée de deux minutes : [français](https://github.com/Misterbra/anoxia-simulator/releases/download/v2.1.0/Anoxia-Simulator-demo-fr.mp4) · [anglais](https://github.com/Misterbra/anoxia-simulator/releases/download/v2.1.0/Anoxia-Simulator-demo-en.mp4) (MP4, 6 Mo).*
 
 Outil d'aide à l'évaluation du **risque d'anoxie** dans un local ou un espace confiné à la suite d'un rejet de gaz inerte (azote, argon, CO₂, hélium, néon).
 

@@ -10,7 +10,9 @@ Desktop application (Windows, offline) for HSE engineers, laboratory safety offi
 
 *[Version française](README.fr.md)*
 
-![Results tab](docs/img/en/02_resultats.png)
+![Demo: results, timeline of events, before / after study](docs/img/demo-en.gif)
+
+*Two-minute narrated demo: [English](https://github.com/Misterbra/anoxia-simulator/releases/download/v2.1.0/Anoxia-Simulator-demo-en.mp4) · [French](https://github.com/Misterbra/anoxia-simulator/releases/download/v2.1.0/Anoxia-Simulator-demo-fr.mp4) (MP4, 6 MB).*
 
 ## What it does
 
